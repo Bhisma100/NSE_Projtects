@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup as bs
 import datetime
 import gspread
 import time
+import json
 import pandas as pd
 import hashlib
 import os
@@ -39,7 +40,7 @@ while True and MaxRetry <= 10 :
             Final_Table.append(New)
         print(">>> Data has been fetched from NSE")
 
-        gc = gspread.service_account(filename=r'C:\Users\Ashish Pal\Desktop\PrevousLapData\Ashish\Python\Exchange Related task\NSE_Projtects\creds.json')
+        gc = gspread.service_account(filename=r"C:\Users\Ashish Pal\Desktop\PrevousLapData\Ashish\Python\Keys and Passwords\GoogleCloud(Key)\creds.json")
         spreadsheet_name = 'Notifications and Listings'
         sheet_name = 'NSE_Listing'
         sh = gc.open(spreadsheet_name).worksheet(sheet_name)
@@ -88,9 +89,11 @@ while True and MaxRetry <= 10 :
                 html_table = "<div style='text-align: center;'><h2>NSE Listing</h2></div>" + NSE_Listing.to_html(index=False)
 
                 # Step 3: Compose Email
-                sender_email = 'ashishkumar@valueresearch.in'
-                receiver_emails = ['ashishkumar@valueresearch.in', 'karonanand@valueresearch.in', 'ravikant@valueresearch.in','adityagupta@valueresearch.in']
-                password = 'znpy jilp wquu ewmq'
+                with open(r"C:\Users\Ashish Pal\Desktop\PrevousLapData\Ashish\Python\Keys and Passwords\EmailandPassword\EmailCreds.json") as config_file:
+                    config = json.load(config_file)
+                sender_email = config['email_username']
+                receiver_emails = ['ashishkumar@valueresearch.in','karonanand@valueresearch.in', 'ravikant@valueresearch.in','adityagupta@valueresearch.in']
+                password = config['email_password']
 
                 msg = MIMEMultipart('alternative')
                 msg['From'] = sender_email
