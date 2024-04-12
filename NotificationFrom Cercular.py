@@ -39,6 +39,7 @@ while True and MaxRetry < 10:
         driver.get('https://www.nseindia.com/resources/exchange-communication-circulars')
         driver.get(url)
         time.sleep(1)
+        time.sleep(1)
         print(">>> fetching Data")
         page_source = driver.page_source
         driver.close()
@@ -120,8 +121,9 @@ while True and MaxRetry < 10:
                     config = json.load(config_file)
                 sender_email = config['email_username']
                 receiver_emails = ['ashishkumar@valueresearch.in','karonanand@valueresearch.in', 'ravikant@valueresearch.in','adityagupta@valueresearch.in']
-                password = 'znpy jilp wquu ewmq'
                 password = config['email_password']
+        
+            
 
                 msg = MIMEMultipart('alternative')
                 msg['From'] = sender_email

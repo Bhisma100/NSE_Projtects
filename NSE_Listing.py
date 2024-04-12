@@ -30,6 +30,8 @@ while True and MaxRetry <= 10 :
 
         # Getting the Data From NSE
         soup= bs(r,'html.parser')
+        # Getting the Data From NSE
+        soup= bs(r,'html.parser')
         table = soup.find('div',{'class':'customTable-width tableWidth-1150 firstRow deque-table-sortable-group'})
         for rows in table:
             row = rows.find_all('td')
